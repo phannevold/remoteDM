@@ -9,23 +9,34 @@
     <h2>Das adventure</h2>
 
     <p>
-        <h:outputText value="#{currentState.narrative}"/>
+        <h:outputText value="#{controller.currentTurn.narrative}"/>
     </p>
 
     <p>
         <h:form>
+            <p> Select your player:
+            <h:selectOneMenu value="#{controller.currentPlayer}">
+                    <f:selectItems value="#{controller.players}" var="player" itemValue="#{player}" itemLabel="#{player.name}" />
+            </h:selectOneMenu>
+            </p>
+            <br/>
+
+
             What do you want to do?
             <br/>
+
+
             <h:inputTextarea value="#{controller.input}"/>
             <br/>
-            <h:commandButton value="Save action" action="#{controller.saveAction}">
+            <h:commandButton value="Save your action" action="#{controller.saveAction}">
                 <f:ajax execute="@form" render="@form"/>
             </h:commandButton>
+
+
+
         </h:form>
     </p>
 
-    <ui:repeat value="#{currentState.allActions}" var="action">
-        <h:outputLabel value="#{action.actionText}"/> <br/>
-    </ui:repeat>
+
 </f:view>
 </html>
